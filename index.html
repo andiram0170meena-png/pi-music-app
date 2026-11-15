@@ -1,185 +1,174 @@
-!DOCTYPE html>
-<html lang="en">
+<!-- File: index.html -->
+<!doctype html>
+<html lang="hi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https://youtube.com https://ytimg.com; script-src 'self' 'unsafe-inline' https://minepi.com; connect-src 'self' https://socialchain.app https://piappengine.com; frame-src 'self' https://youtube.com https://youtube-nocookie.com;" />
-  <title>Pi Hindi Songs & Music Videos</title>
-  <script src="https://minepi.com/pi-sdk.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7136a0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://sdk.minepi.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://socialchain.app https://backend.appstudio-u7cm9zhmha0ruwv8.piappengine.com; frame-ancestors 'self' https://*.pinet.com https://*.minepi.com;">
+  <title>Hindi Songs &amp; Music Videos</title>
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background: #f5f3ff; color: #1f2937; padding-bottom: 40px; }
-    header { background: linear-gradient(135deg, #6d28d9, #7c3aed); color: white; padding: 20px 16px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 12px rgba(109, 40, 217, 0.2); }
-    .header-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-    header h1 { font-size: 1.35rem; font-weight: 700; }
-    header p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
-    #pi-user-badge { background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
-    .container { max-width: 600px; margin: 0 auto; padding: 16px; }
-    .card { background: white; border-radius: 16px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .card h2 { font-size: 1.05rem; margin-bottom: 12px; color: #4c1d95; }
-    .input-group { display: flex; gap: 8px; }
-    input[type="text"] { flex: 1; padding: 12px; border: 1.5px solid #ddd6fe; border-radius: 12px; font-size: 0.95rem; outline: none; }
-    input[type="text"]:focus { border-color: #7c3aed; }
-    button { background: #7c3aed; color: white; border: none; padding: 12px 18px; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 0.95rem; }
-    button:active { background: #5b21b6; }
-    .video-box { margin-top: 14px; position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 12px; overflow: hidden; display: none; }
-    .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .cat-card { background: white; border-radius: 16px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
-    .cat-icon { font-size: 1.8rem; margin-bottom: 8px; }
-    .cat-card h3 { font-size: 1rem; margin-bottom: 4px; }
-    .cat-card p { font-size: 0.8rem; color: #6b7280; margin-bottom: 12px; }
-    .cat-card button { width: 100%; padding: 10px; font-size: 0.85rem; }
-    .quick-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .chip { background: #ede9fe; color: #5b21b6; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: none; }
-    footer { text-align: center; font-size: 0.78rem; color: #6b7280; margin-top: 20px; line-height: 1.5; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f6f1fa; color: #21172b; }
+    header { background: #7136a0; color: white; padding: 24px 18px 20px; border-radius: 0 0 22px 22px; }
+    h1 { font-size: 25px; margin: 0 0 7px; }
+    header p { margin: 0; opacity: .9; }
+    main { padding: 18px; max-width: 720px; margin: auto; }
+    .auth-card { background: white; border-radius: 16px; padding: 16px; margin-bottom: 18px; box-shadow: 0 2px 9px #2b16300d; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .auth-info { font-size: 14px; color: #21172b; }
+    .auth-status { font-size: 12px; color: #65596d; margin-top: 4px; }
+    .search { display: flex; gap: 8px; margin: 4px 0 20px; }
+    input { min-width: 0; flex: 1; padding: 14px; border: 1px solid #d7c9e2; border-radius: 12px; font-size: 16px; }
+    button { border: 0; border-radius: 12px; background: #7136a0; color: #fff; padding: 13px 16px; font-size: 15px; font-weight: 700; cursor: pointer; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    h2 { font-size: 19px; margin: 22px 0 12px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .tile { background: white; border-radius: 16px; padding: 16px; box-shadow: 0 2px 9px #2b16300d; }
+    .tile .emoji { font-size: 27px; }
+    .tile h3 { font-size: 16px; margin: 8px 0 5px; }
+    .tile p { font-size: 13px; color: #65596d; margin: 0 0 12px; line-height: 1.4; }
+    .tile button { width: 100%; padding: 11px 8px; }
+    .note { font-size: 13px; color: #65596d; line-height: 1.5; margin-top: 20px; }
+    footer { text-align: center; color: #796b82; font-size: 12px; padding: 20px; }
+    @media (max-width: 360px) { .grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <header>
-    <div class="header-top">
-      <div>
-        <h1>🎵 Hindi Songs & Music</h1>
-        <p>Old, Romantic & New Bollywood Hits</p>
-      </div>
-      <div id="pi-user-badge">Connecting Pi...</div>
-    </div>
+    <h1>🎵 Hindi Songs &amp; Music Videos</h1>
+    <p>पुराने और नए हिंदी फिल्मी गाने</p>
   </header>
+  <main>
+    <section class="auth-card">
+      <div>
+        <strong class="auth-info" id="user-greeting">Pi Network Login</strong>
+        <div class="auth-status" id="auth-status">Pi Browser से साइन इन करें</div>
+      </div>
+      <button id="pi-login-btn" onclick="authenticatePiUser()">Sign in with Pi</button>
+    </section>
 
-  <div class="container">
-    <div class="card">
-      <h2>▶️ Play Videos Within App</h2>
-      <div class="input-group">
-        <input type="text" id="ytInput" placeholder="Paste YouTube Link or 11-char ID..." value="hRnFEcvvjYY" />
-        <button onclick="playVideo()">Run</button>
-      </div>
-      <div class="quick-list">
-        <button class="chip" onclick="loadPreset('hRnFEcvvjYY')">Jeeta Tha Jiske Liye</button>
-        <button class="chip" onclick="loadPreset('pIBoAh4OXhQ')">Janam Janam</button>
-        <button class="chip" onclick="loadPreset('f0oiheLlFW4')">Saaton Janam</button>
-        <button class="chip" onclick="loadPreset('rk7l7dweauk')">90s Hits Jukebox</button>
-      </div>
-      <div class="video-box" id="videoBox">
-        <iframe id="ytPlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
+    <div class="search">
+      <input id="q" type="search" placeholder="अपना पसंदीदा गाना खोजें…">
+      <button onclick="searchSong()">खोजें</button>
     </div>
 
-    <div class="card">
-      <h2>🔍 Search Song on YouTube</h2>
-      <div class="input-group">
-        <input type="text" id="searchInput" placeholder="Search your favorite song..." />
-        <button onclick="searchSong()">Search</button>
-      </div>
-    </div>
+    <h2>गानों की श्रेणियाँ</h2>
+    <section class="grid">
+      <article class="tile">
+        <div class="emoji">🎞️</div>
+        <h3>पुराने हिंदी गाने</h3>
+        <p>सदाबहार फिल्मी गीत</p>
+        <button onclick="go('old Hindi Bollywood songs')">गाने देखें</button>
+      </article>
+      <article class="tile">
+        <div class="emoji">✨</div>
+        <h3>नए हिंदी गाने</h3>
+        <p>नए बॉलीवुड फिल्मी गीत</p>
+        <button onclick="go('new Hindi Bollywood songs')">गाने देखें</button>
+      </article>
+      <article class="tile">
+        <div class="emoji">❤️</div>
+        <h3>रोमांटिक गाने</h3>
+        <p>प्यार भरे हिंदी गीत</p>
+        <button onclick="go('Hindi romantic Bollywood songs')">गाने देखें</button>
+      </article>
+      <article class="tile">
+        <div class="emoji">🎼</div>
+        <h3>सदाबहार गीत</h3>
+        <p>हमेशा पसंद किए जाने वाले गाने</p>
+        <button onclick="go('evergreen Hindi film songs')">गाने देखें</button>
+      </article>
+    </section>
 
-    <div class="grid">
-      <div class="cat-card">
-        <div>
-          <div class="cat-icon">🎞️</div>
-          <h3>Old Hindi Songs</h3>
-          <p>Evergreen classic film hits</p>
-        </div>
-        <button onclick="openCategory('old hindi evergreen songs')">View songs</button>
-      </div>
-      <div class="cat-card">
-        <div>
-          <div class="cat-icon">✨</div>
-          <h3>New Hindi Songs</h3>
-          <p>Latest Bollywood music</p>
-        </div>
-        <button onclick="openCategory('new bollywood hindi songs')">View songs</button>
-      </div>
-      <div class="cat-card">
-        <div>
-          <div class="cat-icon">❤️</div>
-          <h3>Romantic Songs</h3>
-          <p>Love & soulful melodies</p>
-        </div>
-        <button onclick="openCategory('romantic bollywood hindi songs')">View songs</button>
-      </div>
-      <div class="cat-card">
-        <div>
-          <div class="cat-icon">🎼</div>
-          <h3>Evergreen Hits</h3>
-          <p>All-time favorite tracks</p>
-        </div>
-        <button onclick="openCategory('all time favorite hindi songs')">View songs</button>
-      </div>
-    </div>
-
-    <footer>
-      Pi Hindi Songs • Verified Pi App<br/>
-      Videos play via official YouTube embed player.
-    </footer>
-  </div>
+    <p class="note">किसी श्रेणी पर टैप करने से YouTube पर उस तरह के गानों के परिणाम खुलेंगे। वीडियो YouTube पर ही चलेंगे। कृपया आधिकारिक या अनुमति-प्राप्त वीडियो देखें; इस ऐप में कॉपीराइट वाले गाने अपलोड नहीं किए जाते।</p>
+  </main>
+  <footer>Hindi Songs &amp; Music Videos</footer>
 
   <script>
-    let piSessionToken = null;
+    const APP_STUDIO_LOGIN_URL = "https://backend.appstudio-u7cm9zhmha0ruwv8.piappengine.com/pi/auth/v1/login";
+    let sessionToken = null;
+    let verifiedUser = null;
+    let piInitialized = false;
 
-    async function initPiAuth() {
-      const badge = document.getElementById("pi-user-badge");
+    function onIncompletePaymentFound(payment) {
+      console.warn("Incomplete payment found:", payment);
+    }
+
+    async function ensurePiInitialized() {
+      if (piInitialized) return;
+      if (!window.Pi) {
+        throw new Error("Pi SDK not loaded. Open this app inside Pi Browser.");
+      }
+      await window.Pi.init({ version: "2.0" });
+      piInitialized = true;
+    }
+
+    async function authenticatePiUser() {
+      const btn = document.getElementById("pi-login-btn");
+      const statusEl = document.getElementById("auth-status");
+      const greetingEl = document.getElementById("user-greeting");
+
+      btn.disabled = true;
+      statusEl.textContent = "Pi Network से जुड़ रहा है...";
+
       try {
-        if (!window.Pi) {
-          badge.textContent = "Pi Browser Mode";
-          return;
+        await ensurePiInitialized();
+
+        const authResult = await window.Pi.authenticate(["username"], onIncompletePaymentFound);
+        const accessToken = authResult && authResult.accessToken;
+
+        if (!accessToken) {
+          throw new Error("No accessToken received from Pi.authenticate");
         }
-        await window.Pi.init({ version: "2.0" });
-        const authResult = await window.Pi.authenticate(["username"], function(payment) {});
-        const res = await fetch("https://piappengine.com/pi/auth/v1/login", {
+
+        statusEl.textContent = "App Studio से पहचान सत्यापित हो रही है...";
+
+        const response = await fetch(APP_STUDIO_LOGIN_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ accessToken: authResult.accessToken })
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ accessToken: accessToken })
         });
-        if (res.ok) {
-          const data = await res.json();
-          piSessionToken = data.sessionToken;
-          badge.textContent = "@" + (data.user?.username || "Pioneer");
-        } else {
-          badge.textContent = "Pi Connected";
+
+        if (!response.ok) {
+          throw new Error("App Studio login failed with status " + response.status);
         }
+
+        const data = await response.json();
+        sessionToken = data.sessionToken;
+        verifiedUser = data.user;
+
+        greetingEl.textContent = "नमस्ते, @" + verifiedUser.username;
+        statusEl.textContent = "सत्यापित (UID: " + verifiedUser.uid.slice(0, 8) + "…)";
+        btn.textContent = "Connected";
       } catch (err) {
-        badge.textContent = "Guest Mode";
+        console.error("Pi Auth Error:", err);
+        statusEl.textContent = "लॉगिन विफल: कृपया Pi Browser में खोलकर पुनः प्रयास करें।";
+        btn.disabled = false;
       }
     }
 
-    function extractVideoId(input) {
-      const trimmed = input.trim();
-      if (/^[a-zA-Z0-9_-]{11}$/.test(trimmed)) return trimmed;
-      const match = trimmed.match(/(?:v=|\/embed\/|youtu\.be\/|\/shorts\/)([a-zA-Z0-9_-]{11})/);
-      return match ? match[1] : null;
-    }
+    window.addEventListener("load", function () {
+      authenticatePiUser().catch(function () {});
+    });
 
-    function playVideo() {
-      const val = document.getElementById("ytInput").value;
-      const id = extractVideoId(val);
-      if (!id) {
-        alert("Please enter a valid YouTube link or 11-character Video ID.");
-        return;
-      }
-      const box = document.getElementById("videoBox");
-      const player = document.getElementById("ytPlayer");
-      player.src = "https://youtube.com/embed/" + id + "?autoplay=1";
-      box.style.display = "block";
-    }
-
-    function loadPreset(id) {
-      document.getElementById("ytInput").value = id;
-      playVideo();
+    function go(term) {
+      window.open("https://youtube.com" + encodeURIComponent(term), "_blank", "noopener");
     }
 
     function searchSong() {
-      const q = document.getElementById("searchInput").value.trim();
-      if (!q) return;
-      window.open("https://youtube.com/results?search_query=" + encodeURIComponent(q + " hindi song"), "_blank");
+      const q = document.getElementById("q").value.trim();
+      if (!q) {
+        alert("पहले गाने का नाम लिखें।");
+        return;
+      }
+      go(q + " Hindi song");
     }
 
-    function openCategory(query) {
-      window.open("https://youtube.com/results?search_query=" + encodeURIComponent(query), "_blank");
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      initPiAuth();
-      playVideo();
+    document.getElementById("q").addEventListener("keydown", function (e) {
+      if (e.key === "Enter") searchSong();
     });
   </script>
 </body>
